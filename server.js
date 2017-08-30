@@ -70,20 +70,38 @@ function getUserIdByCodeFromPUP(code, callback) {
         });
 }
 
+function respond(res, userId) {
+    res.cookie('userId', userId);
+
+    //调取cre接口，获取应用的地址
+    let url = config.serviceUrl.cre + '/api/app/service?appIdList=' + config.appRelated.join('&appIdList=');
+    unirest.get(url).end(function (response) {
+        if (response.code === 200) {
+            let serviceList = response.body;
+            for (let i = 0; i < serviceList.length; i++) {
+                let service = serviceList[i];
+                //将所用到的应用url地址放到cookie中去
+                res.cookie(service.id, service.url);
+            }
+            //返回应用界面
+            res.sendFile(path.join(__dirname, 'index.html'));
+        } else {
+            res.send(500, '获取应用地址失败');
+        }
+    });
+}
+
 app.get('/', function (req, res) {
     //如果session中存在user，则说明已经登录过了，直接返回index.html界面
     if (req.session.user) {
-        res.cookie('userId', req.session.user.userId);
-        res.sendFile(path.join(__dirname, 'index.html'));
-
+        respond(res, req.session.user.userId);
     //如果参数中含有PUP返回的code参数，则需要从PUP中获取用户ID
     } else if (req.query.code) {
         getUserIdByCodeFromPUP(req.query.code, function (userId) {
             //将用户信息保存到session中
             req.session.user = {userId: userId};
 
-            res.cookie('userId', userId);
-            res.sendFile(path.join(__dirname, 'index.html'));
+            respond(res, userId);
         });
 
     //重定向到PUP的登录页面
@@ -91,13 +109,13 @@ app.get('/', function (req, res) {
         res.redirect(getPUPLoginUrl(req));
     }
 });
-
-app.get('/service', function (req, res) {
-    let url = config.serviceUrl.cre + '/api/app/service?appIdList=' + config.appRelated.join('&appIdList=');
-    unirest.get(url).end(function (response) {
-        res.send(response.body);
-    });
-});
+//
+// app.get('/service', function (req, res) {
+//     let url = config.serviceUrl.cre + '/api/app/service?appIdList=' + config.appRelated.join('&appIdList=');
+//     unirest.get(url).end(function (response) {
+//         res.send(response.body);
+//     });
+// });
 
 app.listen(config.port, function () {
     console.log('app started listening at ' + config.port);
