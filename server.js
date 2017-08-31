@@ -86,7 +86,7 @@ function respond(res, userId) {
             //返回应用界面
             res.sendFile(path.join(__dirname, 'index.html'));
         } else {
-            res.send(500, '获取应用地址失败');
+            res.status(500).send('获取应用地址失败');
         }
     });
 }
