@@ -17,5 +17,5 @@ module.exports = {
     serviceUrl: {
         cre: 'http://localhost:8080/cre/'
     },
-    appRelated: ['CRE', 'RESOURCEMANAGER', 'PORTAL']
+    appRelated: ['CRE', 'RESOURCEMANAGER', 'PORTAL', 'PEOPLEDAILYAPI']
 };
