@@ -43,10 +43,10 @@ module.exports = {
         return loginUrl;
     },
 
-    getUserIdByCodeFromPUP: function(code, callback) {
+    getUserInfoByCodeFromPUP: function(code, callback) {
         unirest.get(config.serviceUrl.cre + '/api/authorization/users/pupCode/' + code)
             .end(function (response) {
-                callback(response.body.userId);
+                callback(response.body);
             });
     }
 };

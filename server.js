@@ -24,8 +24,9 @@ app.use(session({
     saveUninitialized: false
 }));
 
-function respond(res, userId, indexPath) {
-    res.cookie('userId', userId);
+function respond(res, user, indexPath) {
+    res.cookie('userId', user.userId);
+    res.cookie('userName', user.userName);
 
     //调取cre接口，获取应用的地址
     let url = config.serviceUrl.cre + '/api/app/service?appIdList=' + config.appRelated.join('&appIdList=');
@@ -48,14 +49,14 @@ function respond(res, userId, indexPath) {
 function go(req, res, indexPath) {
     //如果session中存在user，则说明已经登录过了，直接返回index.html界面
     if (req.session.user) {
-        respond(res, req.session.user.userId, indexPath);
-        //如果参数中含有PUP返回的code参数，则需要从PUP中获取用户ID
+        respond(res, req.session.user, indexPath);
+        //如果参数中含有PUP返回的code参数，则需要从PUP中获取用户信息
     } else if (req.query.code) {
-        pupUtil.getUserIdByCodeFromPUP(req.query.code, function (userId) {
+        pupUtil.getUserInfoByCodeFromPUP(req.query.code, function (user) {
             //将用户信息保存到session中
-            req.session.user = {userId: userId};
+            req.session.user = user;
 
-            respond(res, userId, indexPath);
+            respond(res, user, indexPath);
         });
 
         //重定向到PUP的登录页面
