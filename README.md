@@ -5,9 +5,9 @@
  - 安装nodejs。
 
 #### 设置环境变量
-linux下设置：`NODE_ENV={项目名称}`
-windows下设置：`set NODE_ENV={项目名称}`
-项目名称是指项目的代号，代码会根据项目名称读取不同的配置。内蒙古的项目名称为neimenggu，人民日报社的项目名称为peopledaily。
+ - linux下设置：`NODE_ENV={项目名称}`
+ - windows下设置：`set NODE_ENV={项目名称}`
+ - 项目名称是指项目的代号，代码会根据项目名称读取不同的配置。内蒙古的项目名称为neimenggu，人民日报社的项目名称为peopledaily。
 
 #### 启动
  - 解压zip包，`unzip pdmi_code_sso_server.zip`
