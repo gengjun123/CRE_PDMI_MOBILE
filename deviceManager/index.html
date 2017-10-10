@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>设备管理</title>
+		<link href="static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="static/css/index.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="container containerDiv">
+			<div class="row mainTop">
+				<div class="col-sm-12 top1">
+					<div class="top1Div">
+						<p class="font1">采访设备管理系统</p>
+						<p id="goBack" class="font3">退出</p>
+						<p class="font2">设备管理员</p>
+					</div>
+					
+				</div>
+			</div>
+			<div class="row mainBottow">
+				<div class="row bottom1">
+					<div class="col-sm-12 bottom1Div">
+						<div class="searchDiv">
+							<div class="btn-group searchSelect">
+								<select class="form-control searchSelectSelect searchHeight" id="secrchSelect">
+						            <option value="deviceName" selected="selected">设备名称</option>
+						            <option value="borrowerName">借出人</option>
+								</select>
+							</div>
+							<div class="searchDivRight">
+								<div class="input-group">
+									<input type="text" class="form-control searchHeight" id="searchInput">
+									<span class="input-group-btn">
+	                    				<button class="btn btn-default searchButton searchHeight" type="button" id="searchBtn">搜索</button>
+	                    			</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--<div class="alert alert-danger alert-dismissable col-sm-2 alertTitle">
+					</div>-->
+				</div>
+				<div class="row bottom2">
+					<div class="col-sm-12 bottom2Div">
+						<div class="bottom2DivDiv">
+							<p>
+								<a id="modalA" class="modalA" href="#">
+									<span class="glyphicon glyphicon-plus-sign modalSpan" style="color: red;"></span>
+								</a>
+								<span style="color: red;">设备入库</span>
+							</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="row bottom3">
+					<!--<div class="col-sm-1"></div>-->
+					<div class="col-sm-12 tableDivClass">
+						<table class="table tableClass">
+							<thead>
+								<tr></tr>
+								<tr>
+									<th>设备</th>
+									<th>
+										<div class="btn-group stateDiv">
+											<select class="form-control stateBtn" id="pageChanged">
+									            <option selected="selected" value="ALLSTATE">全部</option>
+									            <option value="IN_STOCK">在库</option>
+									            <option value="BORROWED">出借</option>
+									            <option value="SCRAPPED">报废</option>
+											</select>
+										</div>
+									</th>
+									<th>借出信息</th>
+									<th>预计归还时间</th>
+									<th>
+										操作
+									</th>
+								</tr>
+							</thead>
+							<tbody id="listTabledata">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row bottom4">
+					<div class="col-sm-12 bottom4Div">
+						<div class="bottom4DivDiv">
+							<ul class="pagination pagination-lg bottom4Ul pageSelectUl">
+								<li><a href="#">&laquo;</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">...</a></li>
+								<li><a href="#">10</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+		</div>
+		<!--模态框-->
+		<div class="modal fade" id="titleModule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">确认删除吗？</h4>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary searchButton moduleBtn">确认</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<div class="modal fade" id="titleModuleScrap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel2">确认报废吗？</h4>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary searchButton moduleBtnScrap">确认</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<script src="static/js/jquery-1.10.2.min.js"></script>
+		<script src="static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="static/js/common.js"></script>
+		<script src="static/js/index.js"></script>
+		<div id="background" class="background" style="display: none;"></div>
+		<div id="putInStorageProgressBar" class="progressBar" style="display: none;">
+			<iframe name="putInStorageIframe" width=925px height=645px marginwidth=0 marginheight=0 frameborder="no" border="0" src="static/modals/putInStorage.html"></iframe>
+		</div>
+		<div id="lendProgressBar" class="progressBar" style="display: none;">
+			<iframe name="lendIfram" width=925px height=645px marginwidth=0 marginheight=0 frameborder="no" border="0" src="static/modals/lend.html"></iframe>
+		</div>
+		<div id="returnProgressBar" class="progressBar" style="display: none;">
+			<iframe name="returnIfram" width=925px height=645px marginwidth=0 marginheight=0 frameborder="no" border="0" src="static/modals/return.html"></iframe>
+		</div>
+	</body>
+
+</html>

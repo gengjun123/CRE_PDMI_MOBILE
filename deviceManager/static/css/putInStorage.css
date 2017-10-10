@@ -1,0 +1,80 @@
+body {
+	width: 920px;
+	height: 640px;
+	overflow-y: auto !important;
+	overflow-x: hidden;
+}
+
+.font1 {
+	size: 14px;
+	color: #888;
+}
+
+.putInStroageFrom {
+	/*padding-top: 20px;*/
+}
+.putInStroageTextarea {
+	font-size: 16px;
+	color: #333;
+}
+.dataInput {
+	background-color: white!important;
+}
+.dataSpan{
+	background-color: white;
+}
+.putInStroage{
+	text-align: left;
+	margin-top: 20px;
+	font-size: 24px;
+	color: #333;
+}
+.removeIcon {
+	float: right;
+	margin-right: 10px;
+}
+.btnCancel{
+	margin-left: 20px;
+	width: 134px;
+	height: 42px;
+	font-size: 18px;
+}
+.btnOk {
+	margin-left: 20px;
+	width: 134px;
+	height: 42px;
+	color: white;
+	background-color: red;
+	font-size: 18px;
+}
+.btnDiv{
+	padding-top: 15px;
+}
+.modulClose{
+	width: 25px;
+    height: 25px;
+    float: right;
+    margin-top: 22px;
+    margin-right: 30px;
+    background: url(../img/module-close.svg) no-repeat;
+}
+.putInStroageTitle{
+	margin-left: -20px;
+}
+input{
+	height: 36px!important;
+}
+label.error{
+	background:url(../img/unchecked.gif) no-repeat 10px 3px;
+	padding-left: 30px;
+	font-family:georgia;
+	font-size: 15px;
+	font-style: normal;
+	color: red;
+}
+
+label.success{
+	background:url(../img/checked.gif) no-repeat 10px 3px;
+	padding-left: 30px;
+}
+

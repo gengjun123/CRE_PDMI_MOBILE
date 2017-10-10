@@ -15,7 +15,7 @@ module.exports = {
         authorizeUrl: 'http://oauth.pup.hubpd.com/pup-asserver/authorize'
     },
     serviceUrl: {
-        cre: 'http://localhost:8080/cre/'
+        cre: 'http://192.168.8.241/cre/'
     },
     appRelated: ['CRE', 'RESOURCEMANAGER', 'PORTAL', 'PEOPLEDAILYAPI']
 };

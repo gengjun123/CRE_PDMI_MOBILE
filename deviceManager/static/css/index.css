@@ -1,0 +1,274 @@
+.container {
+	border: 1px solid black;
+	height: 600px;
+	width: 98%;
+	margin-top: 20px;
+}
+.containerDiv{
+	/*width: 1200px;*/
+}
+.tableDivClass,.bottom2Div{
+	text-align:center;
+}
+.tableClass,.top1Div{
+	width: 1200px;
+	margin:auto;
+	text-align:left;
+}
+.bottom2DivDiv{
+	width: 1200px;
+	margin:auto;
+	text-align:left;
+}
+.mainTop {
+	border-bottom: 1px solid black;
+	height: 100px;
+}
+
+.mainBottow {
+	/*height: 400px;*/
+}
+
+.top1 {
+	display: table-cell;
+	text-align: left;
+	padding-top: 30px;
+}
+.font1 {
+	font-weight: bold;
+	font-size: large;
+	float: left;
+}
+.font2 {
+	padding-top: 30px;
+	float: right;
+	font-weight: bold;
+	padding-top: 10px;
+	margin-right: 20px;
+}
+.font3 {
+	padding-top: 33px;
+	font-weight: bold;
+	float: right;
+	padding-top: 10px;
+}
+
+.bottom1 {
+	height: 120px;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-top: 20px;
+}
+
+.bottom2 {
+	height: 5%;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.bottom3 {
+	height: 64%;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+/*.bottom1Div{
+	text-align:center;
+}*/
+.bottom1DivDiv{
+	text-align: center;
+}
+.deviceName{
+	cursor:pointer;
+}
+
+.bottom4 {
+	height: 10%;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.ulInput {
+	width: 200px;
+}
+
+.searchDiv {
+	
+	width: 1200px;
+	margin:auto;
+	text-align:left;
+}
+.stateBtn {
+	padding: 0;
+	background: none;
+	border: none;
+	font-size: 14px;
+	outline: none!important;
+	box-shadow: none!important;
+	font-weight: bolder;
+}
+
+.btn:hover{
+	outline:none!important;
+	background-color: white;
+}
+.btn:focus {
+	outline:none!important;
+	background-color: white;
+}
+.btn:checked {
+	outline:none!important;
+	background-color: white;
+}
+.btn:active {
+	outline:none!important;
+	background-color: white!important;
+}
+.stateBtn:-ms-input-placeholder {
+	outline:none!important;
+	background-color: white!important;
+}
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+	background-color:white!important;
+}
+.btnLi {
+	list-style:none;
+	padding: 0px;
+	margin: 0px;
+	float: left;
+	padding-right: 10px;
+}
+.btnUl {
+	padding: 0px;
+	margin: 0px;
+}
+.btnLi button {
+	border: 1px solid red;
+	color: red;
+}
+.btnLi button:focus {
+	border: 1px solid red;
+	color: red;
+}
+.btnLi button:hover {
+	border: 1px solid red;
+	color: red;
+}
+.btnLi button:active {
+	border: 1px solid red;
+	color: red;
+}
+.btnLi button:checked {
+	border: 1px solid red;
+	color: red;
+}
+.searchButton{
+	background-color: #F85759;
+	color: white;
+	width: 65px;
+}
+.searchButton:focus {
+	background-color: #F85759;
+	color: white;
+}
+.searchButton:active {
+	background-color: #F85759;
+	color: white;
+}
+.searchButton:checked {
+	background-color: #F85759;
+	color: white;
+}
+.searchButton:hover {
+	background-color: #F85759;
+	color: white;
+}
+.searchButton: {
+	background-color: #F85759;
+	color: white;
+}
+.progressBar {
+	display: block;
+	top: 10%;
+	left: 18%;
+	margin-left: -74px;
+	margin-top: -14px;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
+	line-height: 27px;
+	font-weight: bold;
+	position: fixed;
+	z-index: 10001;
+	border-radius: 5px !important;
+}
+.background {
+	display: block;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	filter: alpha(opacity=40);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	background-color:#666666;
+}
+.searchSelect {
+	width: 110px;
+	height: 50px;
+	float: left; 
+	padding-top: 30px;
+	margin-left: 300px;
+}
+.searchSelectSelect {
+	font-size: 14px;
+	font-weight: bolder;
+	color: #333;
+}
+.searchDivRight {
+	height: 50px;
+	float: left; 
+	padding-top: 30px;
+	padding-left: 1px;
+	width: 450px;
+}
+.searchHeight {
+	height: 45px;
+}
+.bottom4DivDiv{
+	width: 1200px;
+	margin:auto;
+	text-align:left;
+}
+.bottom4Ul {
+	float: right;
+	margin-top: 0px;
+}
+
+.bottom4Ul li a{
+	color: #888;
+	border: 0px;
+}
+.idTd{
+	display: none;
+}
+.moduleBtn {
+	border-color:red;
+}
+.alertTitle {
+	display: none;
+	z-index: 1001;
+}
+.stateDiv {
+	height: 28px;
+    margin-left: -5px;
+}
+.dots{
+	cursor:not-allowed;
+}
+#toPage{
+	width: 60px;
+	margin-top: 10px;
+}
+#toPageBtn {
+	cursor: pointer;
+}

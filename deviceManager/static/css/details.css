@@ -1,0 +1,117 @@
+.container {
+	border: 1px solid black;
+	width: 95%;
+	margin-top: 10px;
+}
+
+.mainTop {
+	border-bottom: 7px solid #DEDEDE;
+	height: 60px;
+}
+
+.top1 {
+	display: table-cell;
+	text-align: left;
+	padding-top: 17px;
+}
+
+.font1 {
+	font-weight: bold;
+	font-size: large;
+}
+
+.font2 {
+	padding-top: 25px;
+	padding-left: 40px;
+	float: right;
+	font-weight: bold;
+	color: #65A8E8;
+}
+
+.font3 {
+	padding-top: 33px;
+	font-weight: bold;
+}
+.fromFont1{
+	size: 14px;
+	color: #888;
+}
+.fontName{
+	font-size: 16px;
+	color: #333;
+}
+.input {
+	height: 36px;
+}
+.labelName{
+	text-align: left!important;
+}
+.labelDescribe{
+	height: 70px;
+}
+.mainFromDiv,.mainTitleClass,.mainTableDiv,.mainTopDiv,.mainPageDiv{
+	width: 1080px;
+	margin:auto;
+	text-align:left;
+}
+.form-group{
+	margin: 0px!important;
+	padding-top: 20px;
+}
+.mainFrom{
+	padding-top: 20px;
+}
+.fromLabel{
+	text-align: left!important;
+}
+.mainTitleP{
+	padding-top: 25px;
+}
+.mainTableTable{
+	margin-top: 15px;
+}
+.bottom4Ul {
+	float: right;
+	margin-top: 0px;
+}
+
+.bottom4Ul li a{
+	color: #888;
+	border: 0px;
+}
+.mainPage{
+	margin-bottom: 0px;
+}
+.progressBar {
+	display: block;
+	top: 10%;
+	/*left: 25%;*/
+	margin-left: -74px;
+	margin-top: -14px;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
+	line-height: 27px;
+	font-weight: bold;
+	position: fixed;
+	z-index: 10001;
+	border-radius: 5px !important;
+}
+.background {
+	display: block;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	filter: alpha(opacity=40);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	background-color:#666666;
+}
+#toPage{
+	width: 60px;
+	margin-top: 10px;
+}
+#toPageBtn {
+	cursor: pointer;
+}
