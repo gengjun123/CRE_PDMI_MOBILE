@@ -1,0 +1,11 @@
+{
+  "appenders": {
+    "dateFile": {
+      "type": "dateFile",
+      "filename": "/mobile/log.log"
+    }
+  },
+  "categories": {
+    "default": {"appenders": ["dateFile"], "level": "info"}
+  }
+}

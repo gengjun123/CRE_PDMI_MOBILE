@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>设备详情</title>
+		<link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/details.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row mainTop">
+				<div class="mainTopDiv">
+					<div class="col-sm-6 top1">
+						<p class="font1 deviceName"></p>
+					</div>
+					<div class="col-sm-6 top3 buttonList">
+					</div>
+				</div>
+			</div>
+			<div class="row mainFrom">
+				<div class="mainFromDiv">
+					<form class="form-horizontal putInStroageFrom" role="form">
+						<div class="form-group">
+							<label for="firstname" class="col-sm-2 control-label fromLabel"><font class="fromFont1">设备条码:</font></label>
+							<label for="firstname" class="col-sm-4 control-label labelName input"><font class="fontName deviceCode"></font></label>
+						</div>
+						<div class="form-group">
+					 		<label for="firstname" class="col-sm-2 control-label fromLabel"><font class="fromFont1">设备描述:</font></label>
+							<label for="firstname" class="col-sm-9 control-label labelName labelDescribe input"><font class="fontName deviceDescribe"></font></label>
+						</div>
+						<div class="form-group">
+							<label for="firstname" class="col-sm-2 control-label fromLabel"><font class="fromFont1">入库时间:</font></label>
+							<label for="firstname" class="col-sm-4 control-label labelName input"><font class="fontName deviceImportTime"></font></label>
+						</div>
+						<div class="form-group">
+							<label for="firstname" class="col-sm-2 control-label fromLabel"><font class="fromFont1">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</font></label>
+							<label for="firstname" class="col-sm-4 control-label labelName input"><font class="fontName deviceStatus"></font></label>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row mainTitle">
+				<div class="mainTitleClass">
+					<div class="col-sm-6">
+						<p class="fromFont1 mainTitleP">借出 / 归还记录</p>
+					</div>
+				</div>
+			</div>
+			<div class="row mainTable">
+				<div class="mainTableDiv">
+					<div class="col-sm-12">
+					<table class="table mainTableTable">
+   					<thead>
+      					<tr>
+         					<th>借出人</th>
+         					<th>
+         						电话
+         					</th>
+         					<th>借出时间</th>
+         					<th>预计归还时间</th>
+         					<th>
+								实际归还时间
+         					</th>
+      					</tr>
+   					</thead>
+   					<tbody id="detailsTbody">
+   					</tbody>
+				</table>
+				</div>	
+				</div>
+			</div>
+			<div class="row"></div>
+			<div class="row mainPage">
+				<div class="mainPageDiv">
+					<div class="col-sm-12">
+						<ul class="pagination pagination-lg bottom4Ul pageSelectUl">
+							<li><a href="#">&laquo;</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">...</a></li>
+							<li><a href="#">10</a></li>
+							<li><a href="#">&raquo;</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--模态框-->
+		<div class="modal fade" id="titleModule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title" id="myModalLabel">确认删除吗？</h4>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary searchButton moduleBtn">确认</button>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal -->
+		</div>
+		<div class="modal fade" id="titleModuleScrap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title" id="myModalLabel2">确认报废吗？</h4>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary searchButton moduleBtnScrap">确认</button>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal -->
+		</div>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/details.js"></script>
+		<div id="background" class="background" style="display: none;"></div>
+		<div id="putInStorageProgressBar"  class="progressBar" style="display: none;">
+			<iframe name="putInStorageIframe" width=925px height=645px marginwidth=0 marginheight=0 frameborder="no" border="0"  src="modals/alter.html" ></iframe>
+		</div>
+		<div id="lendProgressBar"  class="progressBar" style="display: none;">
+			<iframe name="lendIfram" width=925px height=645px marginwidth=0 marginheight=0 frameborder="no" border="0"  src="modals/lend.html" ></iframe>
+		</div>
+		<div id="returnProgressBar"  class="progressBar" style="display: none;">
+			<iframe name="returnIfram" width=925px height=645px marginwidth=0 marginheight=0 frameborder="no" border="0"  src="modals/return.html" ></iframe>
+		</div>
+	</body>
+
+</html>

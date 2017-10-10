@@ -1,5 +1,8 @@
 let config = require('config-lite')(__dirname);
 let unirest = require('unirest');
+let log4js = require('log4js');
+log4js.configure('./log4js/config.json');
+const logger = log4js.getLogger();
 
 function getRequestUrlFromReq(httpReq) {
     return httpReq.protocol + "://" + httpReq.get('host') + httpReq.originalUrl;
@@ -44,9 +47,16 @@ module.exports = {
     },
 
     getUserInfoByCodeFromPUP: function(code, callback) {
-        unirest.get(config.serviceUrl.cre + '/api/authorization/users/pupCode/' + code)
+        let url = config.serviceUrl.cre + '/api/authorization/users/pupCode/' + code;
+        logger.info("调用cre接口 begin " + url)
+        unirest.get(url)
             .end(function (response) {
-                callback(response.body);
+                if (response.code === 200) {
+                    callback(response.body);
+                    logger.info("调用cre接口 end 成功 " + url + "");
+                } else {
+                    logger.info("调用cre接口 end 失败" + url + " response body" + response.body);
+                }
             });
     }
 };
