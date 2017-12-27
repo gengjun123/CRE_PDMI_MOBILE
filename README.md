@@ -5,6 +5,6 @@
  - 安装nodejs。
  
 #### 启动
- - 解压zip包，`unzip pdmi_code_sso_server.zip`
+ - 解压zip包，`unzip {包名}.zip`
  - 安装forever进程管理工具 `npm i forever -g`
  - cd到解压缩的目录，执行 `forever start server.js`
