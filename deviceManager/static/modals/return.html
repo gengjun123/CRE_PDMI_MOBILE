@@ -55,7 +55,7 @@
 			<div class="form-group">
 				<label for="firstname" class="col-sm-2 control-label"><font class="font1">归还时间</font></label>
 				<div class="col-sm-4 input">
-					<div class="dataPicker input-group date form_datetime col-sm-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:ii">
+					<div id="returnTime" class="dataPicker input-group date form_datetime col-sm-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:ii">
                     <input class="form-control dataInput" size="16" id="dtp_input2input" type="text" value="" readonly>
 					<span class="input-group-addon dataSpan"><span class="glyphicon glyphicon-calendar"></span></span>
                 	</div>
@@ -63,7 +63,7 @@
 				</div>
 				<input type="hidden" class="timeReturned" id="timeReturned" value="" />
 				<div class="col-sm-4">
-					<label id="returnTime-error">归还时间不能为空</label>
+					<label id="returnTime-error">归还时间早于借出时间</label>
 				</div>
 			</div>
 			<hr style="margin-top: 160px;">

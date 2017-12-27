@@ -1,16 +1,15 @@
-var wholeUrl="http://192.168.8.189:8080";
+var wholeUrl="http://192.168.8.189:8080/deviceManagerAPI";
+var returnBorrowTime;
+var submitFlag1=false;
 var Return=function() {
 	return {
 		init:function() {
-			wholeUrl=Return.get_cookie("DEVICE_MANAGER");
+			wholeUrl=Return.get_cookie("DEVICE_MANAGER_API");
 			Return.begin();
-			var nowTime=Return.getNowFormatDate();
-			$("#dtp_input2input").val(nowTime);
-			$("#dtp_input2").attr("value",nowTime);
 		},
 		begin:function() {
 			$(".form_datetime").datetimepicker({
-			    /*minView: "month",*/ //选择日期后，不会再跳转去选择时分秒 
+			    /*minView: "month",*/ //选择日期后，不会再跳转去选择时分秒
 				language:  'zh-CN',
 				format: 'yyyy-mm-dd hh:ii',
 				todayBtn:  1,
@@ -23,8 +22,7 @@ var Return=function() {
 			});
 			$("#returnOk").click(function() {
 				var flag1=$("#select_auditor").val()!=null&&$("#select_auditor").val()!="";
-				var flag2=$("#dtp_input2input").val()!=null&&$("#dtp_input2input").val()!="";
-				if(flag1&&flag2) {
+				if(flag1&&submitFlag1) {
 					var oldValue2=$("#dtp_input2").attr("value");
 					oldValue2+=":00";
 					var newValue2=new Date(oldValue2).getTime();
@@ -32,7 +30,6 @@ var Return=function() {
 					Return.submitFrom();
 				}else {
 					if(!flag1) {$("#returnName-error").show()};
-					if(!flag2) {$("#returnTime-error").show()};
 				}
 			});
 			$("#select_auditor").change(function() {
@@ -42,11 +39,14 @@ var Return=function() {
 					$("#returnName-error").show();
 				}
 			});
-			$("#dtp_input2input").change(function() {
-				if($("#dtp_input2input").val()!=null&&$("#dtp_input2input").val()!="") {
-					$("#returnTime-error").hide();
-				}else {
+			$("#returnTime").change(function() {
+				var returnTimeTemp=$("#dtp_input2input").val()+":00";
+				if(new Date(returnTimeTemp).getTime()<returnBorrowTime) {
 					$("#returnTime-error").show();
+					submitFlag1=false;
+				}else {
+					$("#returnTime-error").hide();
+					submitFlag1=true;
 				}
 			})
 			Return.loadUserData();
@@ -120,18 +120,30 @@ var Return=function() {
 			var returnCode=window.sessionStorage.getItem("returnCode");
 			var returnBorrowerName=window.sessionStorage.getItem("returnBorrowerName");
 			var returnBorrowerPhone=window.sessionStorage.getItem("returnBorrowerPhone");
+			returnBorrowTime=window.sessionStorage.getItem("returnBorrowTime");
+			returnBorrowTime=parseInt(returnBorrowTime);
 			$(".fontName").html(returnName);
 			$(".fontCode").html(returnCode);
 			$(".fontBorrowerName").html(returnBorrowerName);
 			$(".fontBorrowerPhone").html(returnBorrowerPhone);
 			$("#returnId").attr("value",returnId);
+			
+			var nowTimeDate=new Date().getTime();
+			var nowTime=Return.getNowFormatDate(returnBorrowTime>nowTimeDate?returnBorrowTime:nowTimeDate);
+			$("#dtp_input2input").val(nowTime);
+			$("#dtp_input2").attr("value",nowTime);
 		},
 		closeFun:function() {
 			$("#background,#returnProgressBar",window.parent.document).css("display","none");
 			parent.Common.reload();
 		},
-		getNowFormatDate:function() {
-		    var date = new Date();
+		getNowFormatDate:function(paramDate) {
+			var date;
+			if(paramDate!=null) {
+				date = new Date(paramDate);
+			}else {
+				date=new Date();
+			}
 		    var seperator1 = "-";
 		    var seperator2 = ":";
 		    var month = date.getMonth() + 1;

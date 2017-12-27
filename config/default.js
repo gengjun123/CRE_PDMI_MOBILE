@@ -17,5 +17,5 @@ module.exports = {
     serviceUrl: {
         cre: 'http://192.168.8.241/cre/'
     },
-    appRelated: ['CRE', 'RESOURCEMANAGER', 'PORTAL', 'PEOPLEDAILYAPI', 'DEVICE_MANAGER_API']
+    appRelated: ['CRE', 'RESOURCEMANAGER', 'PORTAL', 'PEOPLEDAILYAPI', 'DEVICEMANAGERAPI']
 };

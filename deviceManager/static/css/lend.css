@@ -96,7 +96,7 @@ label.success{
 	color: red;
 	display: none;
 }
-#borrowerTime-error{
+#borrowerTime-error,#returnTime-error{
 	background:url(../img/unchecked.gif) no-repeat 1px 10px;
 	padding-left: 21px;
 	font-family:georgia;
@@ -105,4 +105,23 @@ label.success{
 	color: red;
 	display: none;
 	padding-top: 7px;
+}
+/*.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+	background-color:red!important;
+}*/
+.btn:hover{
+	outline:none!important;
+	background-color: white!important;
+}
+.btn:focus {
+	outline:none!important;
+	background-color: white!important;
+}
+.btn:checked {
+	outline:none!important;
+	background-color: white!important;
+}
+.btn:active {
+	outline:none!important;
+	background-color: white!important;
 }

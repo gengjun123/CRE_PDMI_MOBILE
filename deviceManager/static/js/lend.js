@@ -1,13 +1,14 @@
-var wholeUrl="http://192.168.8.189:8080";
+var wholeUrl="http://192.168.8.189:8080/deviceManagerAPI";
+var lendImportTime;
+var submitFlag1=true;
+var submitFlag2=true;
+var submitFlag3=true;
 var Lend=function() {
 	return {
 		init:function() {
-			wholeUrl=Lend.get_cookie("DEVICE_MANAGER");
+			wholeUrl=Lend.get_cookie("DEVICE_MANAGER_API");
 			/*Lend.loadInitData();*/
 			Lend.begin();
-			var nowTime=Lend.getNowFormatDate();
-			$("#dtp_input2input").val(nowTime);
-			$("#dtp_input2").attr("value",nowTime);
 		},
 		get_cookie:function(Name) {
 		   var search = Name + "="//查询检索的值
@@ -40,8 +41,7 @@ var Lend=function() {
 			});
 			$("#lendOk").click(function() {
 				var flag1=$("#select_auditor").val()!=null&&$("#select_auditor").val()!="";
-				var flag2=$("#dtp_input2input").val()!=null&&$("#dtp_input2input").val()!="";
-				if(flag1&&flag2) {
+				if(flag1&&submitFlag1&&submitFlag2&&submitFlag3) {
 					if(Lend.validform().form()) {
 						var oldValue2=$("#dtp_input2").attr("value");
 						var oldValue3=$("#dtp_input3").attr("value");
@@ -56,24 +56,40 @@ var Lend=function() {
 					}
 				}else {
 					if(!flag1) {$("#borrowerName-error").show()};
-					if(!flag2) {$("#borrowerTime-error").show()};
 				}
 				
 			});
 			$("#select_auditor").change(function() {
 				if($("#select_auditor").val()!=null&&$("#select_auditor").val()!="") {
 					$("#borrowerName-error").hide();
+					submitFlag1=true;
 				}else {
 					$("#borrowerName-error").show();
+					submitFlag1=false;
 				}
 			});
-			$("#dtp_input2input").change(function() {
-				if($("#dtp_input2input").val()!=null&&$("#dtp_input2input").val()!="") {
-					$("#borrowerTime-error").hide();
+			$("#predictReturnTime").change(function() {
+				var tempLendTime=$("#dtp_input2").val()+":00";
+				var tempReturnTime=$("#dtp_input3").val()+":00";
+				if((new Date(tempReturnTime).getTime())<(new Date(tempLendTime).getTime())) {
+					$("#returnTime-error").show();
+					submitFlag2=false;
 				}else {
-					$("#borrowerTime-error").show();
+					$("#returnTime-error").hide();
+					submitFlag2=true;
 				}
-			})
+			});
+			$("#lendTimeDiv").change(function() {
+				var putInStoreTime=parseInt(lendImportTime);
+				var lendTime=$("#dtp_input2").val()+":00";
+				if((new Date(putInStoreTime).getTime())>(new Date(lendTime).getTime())) {
+					$("#borrowerTime-error").show();
+					submitFlag3=false;
+				}else {
+					$("#borrowerTime-error").hide();
+					submitFlag3=true;
+				}
+			});
 			Lend.loadUserData();
 		},
 		loadUserData:function() {
@@ -103,8 +119,13 @@ var Lend=function() {
 				}
 			});
 		},
-		getNowFormatDate:function() {
-		    var date = new Date();
+		getNowFormatDate:function(paramDate) {
+			var date;
+			if(paramDate!=null) {
+				date = new Date(paramDate);
+			}else {
+				date=new Date();
+			}
 		    var seperator1 = "-";
 		    var seperator2 = ":";
 		    var month = date.getMonth() + 1;
@@ -149,9 +170,15 @@ var Lend=function() {
 			var lendId=window.sessionStorage.getItem("deviceId");
 			var lendName=window.sessionStorage.getItem("lendName");
 			var lendCode=window.sessionStorage.getItem("lendCode");
+			lendImportTime=window.sessionStorage.getItem("lendImportTime");
+			lendImportTime=parseInt(lendImportTime);
 			$(".fontName").html(lendName);
 			$(".fontCode").html(lendCode);
 			$("#lendId").attr("value",lendId);
+			var nowTimeDate=new Date().getTime();
+			var nowTime=Lend.getNowFormatDate(lendImportTime>nowTimeDate?lendImportTime:nowTimeDate);
+			$("#dtp_input2input").val(nowTime);
+			$("#dtp_input2").attr("value",nowTime);
 		},
 		closeFun:function() {
 			$("#background,#lendProgressBar",window.parent.document).css("display","none");

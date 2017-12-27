@@ -82,11 +82,11 @@ function go(req, res, indexPath) {
 }
 
 app.get('/resourceMobile', function (req, res) {
-    go(req, res, 'resourceMobile/index.html');
+    go(req, res, 'resourceMobile/hello.html');
 });
 
 app.get('/resourceMobile/*', function (req, res) {
-    go(req, res, 'resourceMobile/index.html');
+    go(req, res, 'resourceMobile/hello.html');
 });
 
 app.get('/commandMobile', function (req, res) {

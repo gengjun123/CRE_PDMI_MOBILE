@@ -1,8 +1,8 @@
-var wholeUrl="http://192.168.8.189:8080";
+var wholeUrl="http://192.168.8.189:8080/deviceManagerAPI";
 var PutInStorage=function() {
 	return {
 		init:function() {
-			wholeUrl=PutInStorage.get_cookie("DEVICE_MANAGER");
+			wholeUrl=PutInStorage.get_cookie("DEVICE_MANAGER_API");
 			PutInStorage.bindEvent();
 		},
 		bindEvent:function() {

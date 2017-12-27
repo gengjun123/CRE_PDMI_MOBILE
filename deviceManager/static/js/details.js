@@ -1,11 +1,11 @@
 var pageData;
 var isSelectedValue;
 var num;
-var wholeUrl="http://192.168.8.189:8080";
+var wholeUrl="http://192.168.8.189:8080/deviceManagerAPI";
 var Details=function() {
 	return {
 		init:function() {
-			wholeUrl=Details.get_cookie("DEVICE_MANAGER");
+			wholeUrl=Details.get_cookie("DEVICE_MANAGER_API");
 			Details.begin();
 			Details.loadData();
 		},
@@ -20,6 +20,7 @@ var Details=function() {
 			var winHeight = $(window).height();
 			var winWidth = $(window).width();
 			$(".progressBar").css("left",(winWidth-925)*0.56+"px");
+			$(".progressBar").css("top",(winHeight-645)*0.4+"px");
 		},
 		get_cookie:function(Name) {
 		   var search = Name + "="//查询检索的值

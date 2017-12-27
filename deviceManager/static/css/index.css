@@ -204,7 +204,7 @@
 	display: block;
 	width: 100%;
 	height: 100%;
-	opacity: 0.5;
+	opacity: 0.6;
 	filter: alpha(opacity=40);
 	position: fixed;
 	top: 0;
@@ -248,10 +248,10 @@
 	color: #888;
 	border: 0px;
 }
-.idTd{
+.idTd,.borrowTimeTd{
 	display: none;
 }
-.moduleBtn {
+.moduleBtn,.moduleBtnScrap {
 	border-color:red;
 }
 .alertTitle {
@@ -271,4 +271,7 @@
 }
 #toPageBtn {
 	cursor: pointer;
+}
+.tableDivClass{
+	min-height: 300px;
 }

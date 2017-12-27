@@ -1,11 +1,11 @@
 var pageData;
 var isSelectedValue;
 var num;
-var wholeUrl='http://192.168.8.189:8080';
+var wholeUrl='http://192.168.8.189:8080/deviceManagerAPI';
 var Index=function() {
 	return {
 		init:function() {
-			wholeUrl=Index.get_cookie("DEVICE_MANAGER");
+			wholeUrl=Index.get_cookie("DEVICE_MANAGER_API");
 			pageData={};
 			Index.adjust();
 			Index.loadListData();
@@ -37,6 +37,7 @@ var Index=function() {
 			var winHeight = $(window).height();
 			var winWidth = $(window).width();
 			$(".progressBar").css("left",(winWidth-925)*0.56+"px");
+			$(".progressBar").css("top",(winHeight-645)*0.4+"px");
 		},
 		showModule:function() {
 			$(".lend").click(function() {
@@ -44,10 +45,11 @@ var Index=function() {
 				var checkedId=$(this).val();
 				var checkedName=pageData[checkedId].name;
 				var checkedCode=pageData[checkedId].code;
+				var checkedImportTime=pageData[checkedId].importTime;
 				window.sessionStorage.setItem("deviceId",checkedId);
 				window.sessionStorage.setItem("lendName",checkedName);
 				window.sessionStorage.setItem("lendCode",checkedCode);
-				
+				window.sessionStorage.setItem("lendImportTime",checkedImportTime);
 				window.lendIfram.Lend.loadInitData();
 				$("#background,#lendProgressBar").show();
 				Index.adjustModule();
@@ -59,11 +61,13 @@ var Index=function() {
 				var checkedCode=pageData[checkedId].code;
 				var checkedBorrowerName=pageData[checkedId].latestBorrowRecord.borrowerName;
 				var checkedBorrowerPhone=pageData[checkedId].latestBorrowRecord.borrowerPhone;
+				var checkedBorrowTime=pageData[checkedId].latestBorrowRecord.borrowTime;
 				window.sessionStorage.setItem("deviceId",checkedId);
 				window.sessionStorage.setItem("returnName",checkedName);
 				window.sessionStorage.setItem("returnCode",checkedCode);
 				window.sessionStorage.setItem("returnBorrowerName",checkedBorrowerName);
 				window.sessionStorage.setItem("returnBorrowerPhone",checkedBorrowerPhone);
+				window.sessionStorage.setItem("returnBorrowTime",checkedBorrowTime);
 				window.returnIfram.Return.loadInitData();
 				$("#background,#returnProgressBar").show();
 				Index.adjustModule();
@@ -88,26 +92,31 @@ var Index=function() {
 				window.sessionStorage.setItem("checkedId",checkedId);
 			})
 			$(".pageChecked").click(function() {
+				var searchData=Index.getSearchData();
+				var searchInputDeviceName=searchData.searchInputDeviceName;
+				var newChangedValue=searchData.newChangedValue;
+				var searchInputBorrowerName=searchData.searchInputBorrowerName;
+				
 				var newValue=$(this).attr("value");
 				$(".pageChecked").css("color","#888");
 				if(newValue!="nextPage"&&newValue!="lastPage") {
 					$(".pageChecked[value="+newValue+"]").css("color","#C9302C");
 					isSelectedValue=newValue;
-					Index.loadListData(null,null,(parseInt(isSelectedValue)-1)*5,5,null);
+					Index.loadListData(searchInputDeviceName,searchInputBorrowerName,(parseInt(isSelectedValue)-1)*5,5,newChangedValue);
 					Index.showModule();
 				}else {
 					if(newValue=="nextPage") {
 						var newSelectedValue=parseInt(isSelectedValue)+1;
 						$(".pageChecked[value="+newSelectedValue+"]").css("color","#C9302C");
 						isSelectedValue=newSelectedValue;
-						Index.loadListData(null,null,(parseInt(isSelectedValue)-1)*5,5,null);
+						Index.loadListData(searchInputDeviceName,searchInputBorrowerName,(parseInt(isSelectedValue)-1)*5,5,newChangedValue);
 						Index.showModule();
 					}
 					if(newValue=="lastPage") {
 						var newSelectedValue=parseInt(isSelectedValue)-1;
 						$(".pageChecked[value="+newSelectedValue+"]").css("color","#C9302C");
 						isSelectedValue=newSelectedValue;
-						Index.loadListData(null,null,(parseInt(isSelectedValue)-1)*5,5,null);
+						Index.loadListData(searchInputDeviceName,searchInputBorrowerName,(parseInt(isSelectedValue)-1)*5,5,newChangedValue);
 						Index.showModule();
 					}
 				}
@@ -125,13 +134,18 @@ var Index=function() {
 			
 		},
 		toPageFun:function() {
+			var searchData=Index.getSearchData();
+			var searchInputDeviceName=searchData.searchInputDeviceName;
+			var newChangedValue=searchData.newChangedValue;
+			var searchInputBorrowerName=searchData.searchInputBorrowerName;
+			
 			var toPageNum=$("#toPage").val();
 			$("#toPage").val("");
 			if(Index.isPositiveInteger(toPageNum)) {
 				$(".pageChecked").css("color","#888");
 				$(".pageChecked[value="+toPageNum+"]").css("color","#C9302C");
 				isSelectedValue=toPageNum;
-				Index.loadListData(null,null,(parseInt(isSelectedValue)-1)*5,5,null);
+				Index.loadListData(searchInputDeviceName,searchInputBorrowerName,(parseInt(isSelectedValue)-1)*5,5,newChangedValue);
 				Index.showModule();
 			}
 		},
@@ -240,7 +254,7 @@ var Index=function() {
 		},
 		formatDate:function(oldTime) {
 			Date.prototype.toLocaleString=function() {
-				return this.getFullYear() + "/" + (this.getMonth() + 1) + "/" + this.getDate();
+				return this.getFullYear() + "/" + (this.getMonth() + 1) + "/" + this.getDate()+ " " + this.getHours() + ":" + this.getMinutes();
 			}
 			var newTime = new Date(oldTime).toLocaleString();
 			return newTime;
@@ -323,6 +337,7 @@ var Index=function() {
 		onceEvent:function() {
 			$("#modalA").click(function() {
 				$("#background,#putInStorageProgressBar").show();
+				Index.adjustModule();
 			})
 			$(".moduleBtn").click(function() {
 				$('#titleModule').modal('hide');
@@ -362,17 +377,7 @@ var Index=function() {
 					}
 				});
 			})
-			$("#pageChanged").change(function() {
-				var newChangedValue=$("#pageChanged").val();
-				if("ALLSTATE"==newChangedValue) {
-					Index.loadListData(null,null,null,null,null);
-				}else {
-					Index.loadListData(null,null,null,null,newChangedValue);
-				}
-				Index.showModule();
-				
-			})
-			$("#searchBtn").click(function() {
+			$("#searchBtn,#pageChanged").click(function() {
 				Index.searchEvent();
 			})
 			$("#searchInput").bind("keypress",function(event) {
@@ -382,18 +387,36 @@ var Index=function() {
 			})
 		},
 		searchEvent:function() {
+			var searchData=Index.getSearchData();
+			var newChangedValue=searchData.newChangedValue;
+			var searchInputBorrowerName=searchData.searchInputBorrowerName;
+			var searchInputDeviceName=searchData.searchInputDeviceName;
+			Index.pageSelectFun(searchInputDeviceName,searchInputBorrowerName,null,null,newChangedValue);
+			Index.showModule();
+		},
+		getSearchData:function() {
 			var searchType=$("#secrchSelect").val();
 			var searchInput=$("#searchInput").val();
 			if(searchInput=="") {
 				searchInput=null;
 			}
+			var searchInputDeviceName=null;
+			var searchInputBorrowerName=null;
 			if(searchType=="deviceName") {
-				Index.pageSelectFun(searchInput,null,null,null);
+				searchInputDeviceName=searchInput;
 			}
 			if(searchType=="borrowerName") {
-				Index.pageSelectFun(null,searchInput,null,null);
+				searchInputBorrowerName=searchInput;
 			}
-			Index.showModule();
+			var newChangedValue=$("#pageChanged").val();
+			if("ALLSTATE"==newChangedValue) {
+				newChangedValue=null;
+			}
+			var arrSearchData={};
+			arrSearchData['searchInputDeviceName']=searchInputDeviceName;
+			arrSearchData['searchInputBorrowerName']=searchInputBorrowerName;
+			arrSearchData['newChangedValue']=newChangedValue;
+			return arrSearchData;
 		}
 	}
 }();
